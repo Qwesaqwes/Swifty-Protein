@@ -14,21 +14,31 @@ class ViewController: UIViewController
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var usernameText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
+    @IBOutlet weak var touchIDbutton: UIButton!
+    
+    let context:LAContext = LAContext()
     
     
     /*--------------------------------------*/
-    /*---------------ACTION---------------*/
+    /*---------------ACTION-----------------*/
     /*--------------------------------------*/
     
     @IBAction func Login(_ sender: Any)
     {
-        
+        if usernameText.text == "admin" && passwordText.text == "admin"
+        {
+            performSegue(withIdentifier: "listSegue", sender: "")
+        }
+        else
+        {
+            let alert = UIAlertController(title: "Error", message: "Username or Password, wrong", preferredStyle:UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func TouchID(_ sender: Any)
     {
-        let context:LAContext = LAContext()
-        
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
         {
             context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "We need your TouchID", reply: {(wasSuccessful, error) in
@@ -36,6 +46,7 @@ class ViewController: UIViewController
                 {
                     // TouchID valid, segue to new view
                     print ("TouchID successful")
+                    self.performSegue(withIdentifier: "listSegue", sender: "")
                 }
                 else
                 {
@@ -49,6 +60,14 @@ class ViewController: UIViewController
     /*---------------OVERRIDE---------------*/
     /*--------------------------------------*/
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "listSegue"
+        {
+            
+        }
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -61,6 +80,17 @@ class ViewController: UIViewController
         passwordText.layer.cornerRadius = 5
         passwordText.layer.borderWidth = 1
         passwordText.layer.borderColor = UIColor.black.cgColor
+        
+        
+        // Check if device have TouchID
+        var authError: NSError?
+        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError)
+        {
+            if (authError?.code)! == kLAErrorTouchIDNotEnrolled
+            {
+                touchIDbutton.isHidden = true
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

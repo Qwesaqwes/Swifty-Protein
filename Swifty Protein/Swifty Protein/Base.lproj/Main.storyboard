@@ -69,12 +69,103 @@
                     <connections>
                         <outlet property="loginButton" destination="zkc-rZ-UY1" id="tRx-s0-QMI"/>
                         <outlet property="passwordText" destination="khX-qA-w7A" id="qkt-20-FhI"/>
+                        <outlet property="touchIDbutton" destination="EbA-Si-xgG" id="RwU-hf-9m0"/>
                         <outlet property="usernameText" destination="pU6-DV-Mjo" id="xb7-XU-2xV"/>
+                        <segue destination="spp-nn-DeN" kind="show" identifier="listSegue" id="ZsG-Fy-piV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="456.80000000000001" y="118.29085457271366"/>
+        </scene>
+        <!--Molecule List-->
+        <scene sceneID="fM1-ja-JMz">
+            <objects>
+                <viewController id="spp-nn-DeN" customClass="ListViewController" customModule="Swifty_Protein" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BHW-zL-hp5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="6Wo-ML-hDv">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="spp-nn-DeN" id="fOw-BA-chs"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FHU-5o-kvB">
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" rowHeight="59" id="LPn-PP-6Sp" customClass="ListTableViewCell" customModule="Swifty_Protein" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="59"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LPn-PP-6Sp" id="Qal-z9-eUs">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="58.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PV1-D6-WPs">
+                                                    <rect key="frame" x="20" y="18" width="335" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="PV1-D6-WPs" secondAttribute="trailing" constant="20" id="Laj-hL-t19"/>
+                                                <constraint firstItem="PV1-D6-WPs" firstAttribute="leading" secondItem="Qal-z9-eUs" secondAttribute="leading" constant="20" id="PWF-i8-1sZ"/>
+                                                <constraint firstItem="PV1-D6-WPs" firstAttribute="centerY" secondItem="Qal-z9-eUs" secondAttribute="centerY" id="ecW-Dn-593"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="moleculeName" destination="PV1-D6-WPs" id="cpq-yM-Bdo"/>
+                                            <segue destination="GDE-og-6nP" kind="show" identifier="moleculeSegue" id="qmX-5T-meF"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="spp-nn-DeN" id="t5u-aF-xN3"/>
+                                    <outlet property="delegate" destination="spp-nn-DeN" id="mOQ-h3-cvh"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FHU-5o-kvB" firstAttribute="top" secondItem="6Wo-ML-hDv" secondAttribute="bottom" id="3uE-Jv-yjf"/>
+                            <constraint firstItem="6Wo-ML-hDv" firstAttribute="width" secondItem="BHW-zL-hp5" secondAttribute="width" id="7fw-m7-VEY"/>
+                            <constraint firstItem="FHU-5o-kvB" firstAttribute="leading" secondItem="6Wo-ML-hDv" secondAttribute="leading" id="9hU-sM-VTX"/>
+                            <constraint firstItem="FHU-5o-kvB" firstAttribute="width" secondItem="BHW-zL-hp5" secondAttribute="width" id="HH8-hF-jd3"/>
+                            <constraint firstItem="6Wo-ML-hDv" firstAttribute="centerX" secondItem="8Ap-Gd-p9G" secondAttribute="centerX" id="Sf2-JM-KK6"/>
+                            <constraint firstItem="8Ap-Gd-p9G" firstAttribute="bottom" secondItem="FHU-5o-kvB" secondAttribute="bottom" id="mkJ-qX-8ma"/>
+                            <constraint firstItem="6Wo-ML-hDv" firstAttribute="top" secondItem="8Ap-Gd-p9G" secondAttribute="top" id="pl7-iu-7rQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8Ap-Gd-p9G"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Molecule List" id="8Wu-yx-RmW"/>
+                    <connections>
+                        <outlet property="searchBar" destination="6Wo-ML-hDv" id="6Jf-rZ-46s"/>
+                        <outlet property="tableView" destination="FHU-5o-kvB" id="41w-wn-WS6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cwz-df-gyv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1341.5999999999999" y="116.49175412293854"/>
+        </scene>
+        <!--Molecule-->
+        <scene sceneID="YTu-Qe-4ui">
+            <objects>
+                <viewController id="GDE-og-6nP" customClass="MoleculeViewController" customModule="Swifty_Protein" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iD7-zA-CIh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="aOd-IK-Z1T"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Molecule" id="eaM-w0-OIy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R25-EC-Vbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2159" y="116"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jka-SO-GUF">
