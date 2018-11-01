@@ -11,6 +11,7 @@ import UIKit
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate
 {
     var list:[String] = []
+    var ligand:[String] = []
     var searchList = [String]()
     var searching:Bool = false
     @IBOutlet weak var searchBar: UISearchBar!
@@ -46,11 +47,45 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if searching {
+            self.getLigand(name: searchList[indexPath.row])
+        } else {
+            self.getLigand(name: list[indexPath.row])
+        }
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
     {
         searchList = list.filter({$0.range(of: searchText) != nil})
         searching = true
         tableView.reloadData()
+    }
+    
+    private func getLigand(name: String) {
+        let url = URL(string: "https://files.rcsb.org/ligands/view/" + name + "_ideal.pdb")
+        // TODO if url is null ca crash
+        let request = NSMutableURLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            if let error = error {
+                print("1", error)
+            }
+            else if let d = data {
+                let contents = String(data: d, encoding: String.Encoding.utf8)
+                contents?.enumerateLines(invoking: { (line, stop) -> () in
+                    self.ligand.append(line)
+                })
+                print(self.ligand)
+                
+                
+                performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
+
+            }
+        }
+        task.resume()
     }
     
     /*--------------------------------------*/

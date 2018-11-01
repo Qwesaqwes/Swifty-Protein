@@ -50,7 +50,6 @@ class ViewController: UIViewController
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "listSegue", sender: "")
                     }
-                    
                 }
                 else
                 {
