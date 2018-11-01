@@ -13,9 +13,9 @@
 		7E5803CB2188C4AC008993B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E5803C92188C4AC008993B4 /* Main.storyboard */; };
 		7E5803CD2188C4AC008993B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E5803CC2188C4AC008993B4 /* Assets.xcassets */; };
 		7E5803D02188C4AC008993B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E5803CE2188C4AC008993B4 /* LaunchScreen.storyboard */; };
-		7E9FDEF3218A4B5D002CCC5C /* list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7E9FDEF2218A4B5D002CCC5C /* list.txt */; };
 		7E9FDEF6218A4FCD002CCC5C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9FDEF5218A4FCD002CCC5C /* ListTableViewCell.swift */; };
 		7E9FDEF8218A646D002CCC5C /* MoleculeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9FDEF7218A646D002CCC5C /* MoleculeViewController.swift */; };
+		7EBC6AFA218B5D4800C33030 /* list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EBC6AF9218B5D4700C33030 /* list.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +27,9 @@
 		7E5803CC2188C4AC008993B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E5803CF2188C4AC008993B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E5803D12188C4AC008993B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7E9FDEF2218A4B5D002CCC5C /* list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = list.txt; path = ../../../Desktop/list.txt; sourceTree = "<group>"; };
 		7E9FDEF5218A4FCD002CCC5C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		7E9FDEF7218A646D002CCC5C /* MoleculeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleculeViewController.swift; sourceTree = "<group>"; };
+		7EBC6AF9218B5D4700C33030 /* list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = list.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +69,7 @@
 				7E5803CC2188C4AC008993B4 /* Assets.xcassets */,
 				7E5803CE2188C4AC008993B4 /* LaunchScreen.storyboard */,
 				7E5803D12188C4AC008993B4 /* Info.plist */,
-				7E9FDEF2218A4B5D002CCC5C /* list.txt */,
+				7EBC6AF9218B5D4700C33030 /* list.txt */,
 			);
 			path = "Swifty Protein";
 			sourceTree = "<group>";
@@ -153,7 +153,7 @@
 			files = (
 				7E5803D02188C4AC008993B4 /* LaunchScreen.storyboard in Resources */,
 				7E5803CD2188C4AC008993B4 /* Assets.xcassets in Resources */,
-				7E9FDEF3218A4B5D002CCC5C /* list.txt in Resources */,
+				7EBC6AFA218B5D4800C33030 /* list.txt in Resources */,
 				7E5803CB2188C4AC008993B4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
