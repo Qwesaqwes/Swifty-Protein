@@ -16,7 +16,7 @@ class ViewController: UIViewController
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var touchIDbutton: UIButton!
     
-    let context:LAContext = LAContext()
+//    let context:LAContext = LAContext()
     
     
     /*--------------------------------------*/
@@ -39,6 +39,7 @@ class ViewController: UIViewController
     
     @IBAction func TouchID(_ sender: Any)
     {
+        let context:LAContext = LAContext()
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
         {
             context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "We need your TouchID", reply: {(wasSuccessful, error) in
@@ -46,7 +47,10 @@ class ViewController: UIViewController
                 {
                     // TouchID valid, segue to new view
                     print ("TouchID successful")
-                    self.performSegue(withIdentifier: "listSegue", sender: "")
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "listSegue", sender: "")
+                    }
+                    
                 }
                 else
                 {
@@ -84,6 +88,7 @@ class ViewController: UIViewController
         
         // Check if device have TouchID
         var authError: NSError?
+        let context:LAContext = LAContext()
         if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError)
         {
             if (authError?.code)! == kLAErrorTouchIDNotEnrolled
