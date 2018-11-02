@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D276031218CA155005450CC /* SceneKit Scene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6D276030218CA155005450CC /* SceneKit Scene.scn */; };
 		7E031FFD218A2B8E002165EF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E031FFC218A2B8E002165EF /* ListViewController.swift */; };
 		7E5803C62188C4AC008993B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5803C52188C4AC008993B4 /* AppDelegate.swift */; };
 		7E5803C82188C4AC008993B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5803C72188C4AC008993B4 /* ViewController.swift */; };
@@ -21,7 +20,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6D276030218CA155005450CC /* SceneKit Scene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "SceneKit Scene.scn"; sourceTree = "<group>"; };
 		7E031FFC218A2B8E002165EF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		7E5803C22188C4AC008993B4 /* Swifty Protein.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swifty Protein.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5803C52188C4AC008993B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,7 +73,6 @@
 				7E5803CE2188C4AC008993B4 /* LaunchScreen.storyboard */,
 				7E5803D12188C4AC008993B4 /* Info.plist */,
 				7EBC6AF9218B5D4700C33030 /* list.txt */,
-				6D276030218CA155005450CC /* SceneKit Scene.scn */,
 			);
 			path = "Swifty Protein";
 			sourceTree = "<group>";
@@ -166,7 +163,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E5803D02188C4AC008993B4 /* LaunchScreen.storyboard in Resources */,
-				6D276031218CA155005450CC /* SceneKit Scene.scn in Resources */,
 				7E5803CD2188C4AC008993B4 /* Assets.xcassets in Resources */,
 				7EBC6AFA218B5D4800C33030 /* list.txt in Resources */,
 				7E5803CB2188C4AC008993B4 /* Main.storyboard in Resources */,
