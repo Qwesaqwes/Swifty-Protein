@@ -41,6 +41,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         if searching {
             self.getLigand(name: searchList[indexPath.row])
         } else {
@@ -80,14 +81,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 contents?.enumerateLines(invoking: { (line, stop) -> () in
                     ligand.append(line)
                 })
-                
-//                print("ligand", contents)
-                
                 var mole: MoleculeInfo = self.parsing(lig: ligand)
                 mole.name = name
                 if !mole.atom.isEmpty {
-//                    print("MOLE", mole)
                     DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         self.performSegue(withIdentifier: "moleculeSegue", sender: mole)
                     }
                 }
