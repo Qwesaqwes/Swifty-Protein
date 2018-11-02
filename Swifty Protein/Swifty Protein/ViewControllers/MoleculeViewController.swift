@@ -63,7 +63,29 @@ class MoleculeViewController: UIViewController
                 
                 // Rotate cylinder node about X axis so cylinder is laying down
                 newLine.eulerAngles.x = .pi / 2
+//                print("asin x / y", asin(dirVector.x / dirVector.y))
 //                newLine.eulerAngles.z = asin(dirVector.x / dirVector.y)
+                if asin(dirVector.y / dirVector.x).isNaN &&
+                    atan(dirVector.x / dirVector.y) < 0 {
+                    print("DEBUT\n")
+                    print("ASIN x / y", asin(dirVector.x / dirVector.y))
+                    print("ASIN y / x", asin(dirVector.y / dirVector.x))
+                    print("ACOS x / y", acos(dirVector.x / dirVector.y))
+                    print("ACOS y / x", acos(dirVector.y / dirVector.x))
+                    print("ATAN x / y", atan(dirVector.x / dirVector.y))
+                    print("ATAN y / x", atan(dirVector.y / dirVector.x))
+                    print("FIN\n\n")
+                    
+//                    newLine.eulerAngles.z = asin(dirVector.y / dirVector.x)
+//                    newLine.eulerAngles.z = asin(dirVector.x / dirVector.y)
+                    newLine.eulerAngles.z = acos(dirVector.x / dirVector.y)
+                } else if asin(dirVector.y / dirVector.x).isNaN {
+                    newLine.eulerAngles.z = atan(dirVector.x / dirVector.y)
+                } else {
+                    newLine.eulerAngles.z = asin(dirVector.y / dirVector.x)
+                }
+//                newLine.eulerAngles.z = acos(dirVector.x / dirVector.y)
+//                newLine.eulerAngles.z = acos(dirVector.y / dirVector.x)
                 
                 // Rotate cylinder node about Y axis so cylinder is pointing to each node
                 newLine.eulerAngles.y = yAngle
