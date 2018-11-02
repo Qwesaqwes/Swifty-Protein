@@ -19,15 +19,12 @@ struct AtomInfo
 
 struct ConectInfo
 {
-    var id1:Int         // ids of which the tube is conected
-    var id2:Int
-    var id3:Int
-    var id4:Int
-    var id5:Int
+    var ids: [Int] = [] // ids of which the tube is conected
 }
 
 struct MoleculeInfo
 {
-    var atom:[AtomInfo] = []
-    var conect:[ConectInfo] = []
+    var name: String = ""
+    var atom :[AtomInfo] = []
+    var conect :[ConectInfo] = []
 }

@@ -177,7 +177,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Molecule" id="eaM-w0-OIy"/>
                     <connections>
-                        <outlet property="sceneKit" destination="flZ-OP-J9o" id="mWC-XH-Y9R"/>
+                        <outlet property="navBar" destination="eaM-w0-OIy" id="RWO-0H-W6v"/>
+                        <outlet property="sceneView" destination="flZ-OP-J9o" id="9AB-ix-p9z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R25-EC-Vbh" userLabel="First Responder" sceneMemberID="firstResponder"/>

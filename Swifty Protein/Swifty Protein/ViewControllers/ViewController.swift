@@ -76,13 +76,13 @@ class ViewController: UIViewController
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        loginButton.layer.cornerRadius = 5
+//        loginButton.layer.cornerRadius = 5
         usernameText.layer.cornerRadius = 5
         usernameText.layer.borderWidth = 1
-        usernameText.layer.borderColor = UIColor.black.cgColor
+        usernameText.layer.borderColor = UIColor.lightGray.cgColor
         passwordText.layer.cornerRadius = 5
         passwordText.layer.borderWidth = 1
-        passwordText.layer.borderColor = UIColor.black.cgColor
+        passwordText.layer.borderColor = UIColor.lightGray.cgColor
         
         
         // Check if device have TouchID
