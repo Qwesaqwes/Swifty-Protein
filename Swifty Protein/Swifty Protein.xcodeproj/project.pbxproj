@@ -16,6 +16,7 @@
 		7E9FDEF6218A4FCD002CCC5C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9FDEF5218A4FCD002CCC5C /* ListTableViewCell.swift */; };
 		7E9FDEF8218A646D002CCC5C /* MoleculeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9FDEF7218A646D002CCC5C /* MoleculeViewController.swift */; };
 		7EBC6AFA218B5D4800C33030 /* list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EBC6AF9218B5D4700C33030 /* list.txt */; };
+		7EE336C7218BAA970071DDBC /* MoleculeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE336C6218BAA970071DDBC /* MoleculeInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7E9FDEF5218A4FCD002CCC5C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		7E9FDEF7218A646D002CCC5C /* MoleculeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleculeViewController.swift; sourceTree = "<group>"; };
 		7EBC6AF9218B5D4700C33030 /* list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = list.txt; sourceTree = "<group>"; };
+		7EE336C6218BAA970071DDBC /* MoleculeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleculeInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				7E5803C52188C4AC008993B4 /* AppDelegate.swift */,
+				7EE336C3218BA9F20071DDBC /* Structs */,
 				7E9FDEF4218A4FA5002CCC5C /* TableViewCells */,
 				7E602F90218A0B130072F6EC /* ViewControllers */,
 				7E5803C92188C4AC008993B4 /* Main.storyboard */,
@@ -90,6 +93,14 @@
 				7E9FDEF5218A4FCD002CCC5C /* ListTableViewCell.swift */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		7EE336C3218BA9F20071DDBC /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				7EE336C6218BAA970071DDBC /* MoleculeInformation.swift */,
+			);
+			path = Structs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EE336C7218BAA970071DDBC /* MoleculeInformation.swift in Sources */,
 				7E5803C82188C4AC008993B4 /* ViewController.swift in Sources */,
 				7E9FDEF8218A646D002CCC5C /* MoleculeViewController.swift in Sources */,
 				7E9FDEF6218A4FCD002CCC5C /* ListTableViewCell.swift in Sources */,

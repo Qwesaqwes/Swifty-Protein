@@ -119,7 +119,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="moleculeName" destination="PV1-D6-WPs" id="cpq-yM-Bdo"/>
-                                            <segue destination="GDE-og-6nP" kind="show" identifier="moleculeSegue" id="qmX-5T-meF"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -145,6 +144,7 @@
                     <connections>
                         <outlet property="searchBar" destination="6Wo-ML-hDv" id="6Jf-rZ-46s"/>
                         <outlet property="tableView" destination="FHU-5o-kvB" id="41w-wn-WS6"/>
+                        <segue destination="GDE-og-6nP" kind="show" identifier="moleculeSegue" id="8wz-YH-XJF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cwz-df-gyv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -158,10 +158,27 @@
                     <view key="view" contentMode="scaleToFill" id="iD7-zA-CIh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="flZ-OP-J9o">
+                                <rect key="frame" x="0.0" y="32" width="375" height="667"/>
+                                <connections>
+                                    <outlet property="delegate" destination="GDE-og-6nP" id="NDf-Oz-iBy"/>
+                                </connections>
+                            </sceneKitView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="flZ-OP-J9o" firstAttribute="width" secondItem="iD7-zA-CIh" secondAttribute="width" id="77j-jm-fR6"/>
+                            <constraint firstItem="flZ-OP-J9o" firstAttribute="centerX" secondItem="aOd-IK-Z1T" secondAttribute="centerX" id="d8I-s1-Fah"/>
+                            <constraint firstItem="flZ-OP-J9o" firstAttribute="height" secondItem="iD7-zA-CIh" secondAttribute="height" id="lEL-rf-Ddf"/>
+                            <constraint firstItem="flZ-OP-J9o" firstAttribute="centerY" secondItem="aOd-IK-Z1T" secondAttribute="centerY" id="qCc-Pj-ynI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="aOd-IK-Z1T"/>
                     </view>
                     <navigationItem key="navigationItem" title="Molecule" id="eaM-w0-OIy"/>
+                    <connections>
+                        <outlet property="sceneKit" destination="flZ-OP-J9o" id="mWC-XH-Y9R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R25-EC-Vbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

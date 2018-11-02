@@ -10,14 +10,14 @@ import UIKit
 
 class MoleculeViewController: UIViewController
 {
-    var moleculeName:String = ""
+    var moleculeName:MoleculeInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        print (moleculeName)
+        
     }
 
     override func didReceiveMemoryWarning() {

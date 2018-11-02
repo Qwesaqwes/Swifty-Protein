@@ -11,7 +11,6 @@ import UIKit
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate
 {
     var list:[String] = []
-    var ligand:[String] = []
     var searchList = [String]()
     var searching:Bool = false
     @IBOutlet weak var searchBar: UISearchBar!
@@ -57,12 +56,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
     {
-        searchList = list.filter({$0.range(of: searchText) != nil})
-        searching = true
-        tableView.reloadData()
+        if (searchText != "")
+        {
+            searchList = list.filter({$0.range(of: searchText) != nil})
+            searching = true
+            tableView.reloadData()
+        }
+        else
+        {
+            searching = false
+            tableView.reloadData()
+        }
     }
     
-    private func getLigand(name: String) {
+    private func getLigand(name: String)
+    {
+        var ligand:[String] = []
+        
         let url = URL(string: "https://files.rcsb.org/ligands/view/" + name + "_ideal.pdb")
         // TODO if url is null ca crash
         let request = NSMutableURLRequest(url: url!)
@@ -76,16 +86,65 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             else if let d = data {
                 let contents = String(data: d, encoding: String.Encoding.utf8)
                 contents?.enumerateLines(invoking: { (line, stop) -> () in
-                    self.ligand.append(line)
+                    ligand.append(line)
                 })
-                print(self.ligand)
-                
-                
-                performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
-
+//                print(self.ligand)
+                let mole:MoleculeInfo = self.parsing(lig: ligand)
+                if !mole.atom.isEmpty
+                {
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "moleculeSegue", sender: mole)
+                    }
+                }
             }
         }
         task.resume()
+    }
+    
+    private func parsing(lig:[String]) -> MoleculeInfo
+    {
+        var atom:[AtomInfo] = []
+        var conect:[ConectInfo] = []
+        
+        if (lig[0].range(of: "ATOM") == nil)
+        {
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Error", message: "Protein didn't found", preferredStyle:UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            return (MoleculeInfo(atom: [], conect: []))
+        }
+        else
+        {
+            let atomArray:[String] = lig.filter({$0.range(of: "ATOM") != nil})
+            let conectArray:[String] = lig.filter({$0.range(of: "CONECT") != nil})
+            
+            for str in atomArray
+            {
+                let strArray = str.split(separator: " ")
+                atom.append(AtomInfo(id: Int(strArray[1])!, x: Float(strArray[6])!, y: Float(strArray[7])!, z: Float(strArray[8])!, element: String(strArray[11])))
+            }
+            for str in conectArray
+            {
+                let strArray = str.split(separator: " ")
+                switch strArray.count {
+                case 6:
+                    conect.append(ConectInfo(id1: Int(strArray[1])!, id2: Int(strArray[2])!, id3: Int(strArray[3])!, id4: Int(strArray[4])!, id5: Int(strArray[5])!))
+                    break;
+                case 5:
+                    conect.append(ConectInfo(id1: Int(strArray[1])!, id2: Int(strArray[2])!, id3: Int(strArray[3])!, id4: Int(strArray[4])!, id5: 0))
+                    break;
+                case 4:
+                    conect.append(ConectInfo(id1: Int(strArray[1])!, id2: Int(strArray[2])!, id3: Int(strArray[3])!, id4: 0, id5: 0))
+                    break;
+                default:
+                    conect.append(ConectInfo(id1: Int(strArray[1])!, id2: Int(strArray[2])!, id3: 0, id4: 0, id5: 0))
+                    break;
+                }
+            }
+        }
+        return (MoleculeInfo(atom: atom, conect: conect))
     }
     
     /*--------------------------------------*/
@@ -98,10 +157,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         {
             if let vc = segue.destination as? MoleculeViewController
             {
-                if let cell = sender as? ListTableViewCell
-                {
-                    vc.moleculeName = cell.moleculeName.text!
-                }
+                vc.moleculeName? = sender as! MoleculeInfo
             }
         }
     }
