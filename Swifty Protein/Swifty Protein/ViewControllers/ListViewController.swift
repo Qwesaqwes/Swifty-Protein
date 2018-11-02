@@ -64,7 +64,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     {
         var ligand:[String] = []
         
-        guard let url = URL(string: "https://files.rcsb.org/ligands/view/" + name + "_ideal.pdb") else {
+        guard let url = URL(string: "https://files.rcsb.org/ligands/view/" + name + "_model.pdb") else {
             return
         }
         let request = NSMutableURLRequest(url: url)
