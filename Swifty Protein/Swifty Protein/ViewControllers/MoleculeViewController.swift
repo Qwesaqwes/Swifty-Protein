@@ -17,6 +17,11 @@ class MoleculeViewController: UIViewController
     var size: CGFloat = 0.3
     @IBOutlet weak var sceneView: SCNView!
     @IBOutlet weak var navBar: UINavigationItem!
+    @IBOutlet weak var atomElementText: UITextField!
+    
+    /*--------------------------------------*/
+    /*---------------FUNCTION---------------*/
+    /*--------------------------------------*/
     
     private func getAtomColor(element:String) -> UIColor
     {
@@ -55,12 +60,70 @@ class MoleculeViewController: UIViewController
         }
     }
     
+    @objc func handleTap(rec: UITapGestureRecognizer){
+        
+        if rec.state == .ended
+        {
+            let location: CGPoint = rec.location(in: sceneView)
+            let hits = self.sceneView.hitTest(location, options: nil)
+            if !hits.isEmpty
+            {
+                let tappedNode = hits.first?.node
+                for atom in molecule!.atom
+                {
+                    if atom.x == tappedNode?.position.x && atom.y == tappedNode?.position.y && atom.z == tappedNode?.position.z
+                    {
+                        if atomElementText.isHidden
+                        {
+                            atomElementText.isHidden = false
+                        }
+                        atomElementText.text = String(describing: "Atom Element: " + "\(atom.element)")
+                    }
+                }
+            }
+            else
+            {
+                atomElementText.text = String(describing: "")
+                atomElementText.isHidden = true
+            }
+        }
+    }
+    
+    /*--------------------------------------*/
+    /*----------------ACTION----------------*/
+    /*--------------------------------------*/
+
+    @IBAction func shareButton(_ sender: UIBarButtonItem)
+    {
+        // image to share
+        let image = sceneView.snapshot()
+        
+        // set up activity view controller
+        let imageToShare = [image]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [UIActivityType.airDrop]
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    /*--------------------------------------*/
+    /*---------------OVERRIDE---------------*/
+    /*--------------------------------------*/
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navBar.title = molecule?.name
 
         let scene = SCNScene()
+        
+//        let cameraNode = SCNNode()
+//        cameraNode.camera = self.camera
+//        cameraNode.position = SCNVector3(x: -3.0, y: 3.0, z: 3.0)
         
         for atom in molecule!.atom {
             let sphere = SCNSphere(radius: self.size)
@@ -71,6 +134,10 @@ class MoleculeViewController: UIViewController
             
             scene.rootNode.addChildNode(sphereNode)
             sphereNodeDic[atom.id] = sphereNode
+            
+//            let constraint = SCNLookAtConstraint(target: sphereNode)
+//            constraint.isGimbalLockEnabled = true
+//            cameraNode.constraints = [constraint]
         }
         
         for conect in molecule!.conect {
@@ -83,10 +150,28 @@ class MoleculeViewController: UIViewController
                 scene.rootNode.addChildNode(CylinderLine(parent: scene.rootNode, v1: node1, v2: node2, radius: 0.05, color: UIColor.white))
             }
         }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
+        sceneView.addGestureRecognizer(tap)
+        
+        
+        
         sceneView.scene = scene
-        sceneView.backgroundColor = UIColor.black
+        sceneView.backgroundColor = UIColor.white
         sceneView.autoenablesDefaultLighting = true
-        sceneView.allowsCameraControl = true
+//        sceneView.allowsCameraControl = true
+        
+        atomElementText.sizeToFit()
+        atomElementText.backgroundColor = sceneView.backgroundColor
+        atomElementText.isHidden = true
+        if atomElementText.backgroundColor == UIColor.white
+        {
+            atomElementText.textColor = UIColor.black
+        }
+        else
+        {
+            atomElementText.textColor = UIColor.white
+        }
     }
     
     override func didReceiveMemoryWarning() {

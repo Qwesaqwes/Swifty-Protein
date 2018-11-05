@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JrH-YX-dYa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JrH-YX-dYa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -165,18 +165,35 @@
                                     <outlet property="delegate" destination="GDE-og-6nP" id="NDf-Oz-iBy"/>
                                 </connections>
                             </sceneKitView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jKH-Dc-8o5">
+                                <rect key="frame" x="16" y="88" width="97" height="22"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="width" secondItem="iD7-zA-CIh" secondAttribute="width" id="77j-jm-fR6"/>
+                            <constraint firstItem="jKH-Dc-8o5" firstAttribute="top" secondItem="aOd-IK-Z1T" secondAttribute="top" constant="24" id="FpP-XD-Lbf"/>
+                            <constraint firstItem="jKH-Dc-8o5" firstAttribute="leading" secondItem="aOd-IK-Z1T" secondAttribute="leading" constant="16" id="OCN-YY-WRX"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerX" secondItem="aOd-IK-Z1T" secondAttribute="centerX" id="d8I-s1-Fah"/>
+                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="jKH-Dc-8o5" secondAttribute="trailing" constant="262" id="eNu-bn-MXo"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="height" secondItem="iD7-zA-CIh" secondAttribute="height" id="lEL-rf-Ddf"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerY" secondItem="aOd-IK-Z1T" secondAttribute="centerY" id="qCc-Pj-ynI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aOd-IK-Z1T"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Molecule" id="eaM-w0-OIy"/>
+                    <navigationItem key="navigationItem" title="Molecule" id="eaM-w0-OIy">
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="BxS-0O-qj2">
+                            <connections>
+                                <action selector="shareButton:" destination="GDE-og-6nP" id="kAD-lG-s8c"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="atomElementText" destination="jKH-Dc-8o5" id="bce-UC-gas"/>
                         <outlet property="navBar" destination="eaM-w0-OIy" id="RWO-0H-W6v"/>
                         <outlet property="sceneView" destination="flZ-OP-J9o" id="9AB-ix-p9z"/>
                     </connections>
