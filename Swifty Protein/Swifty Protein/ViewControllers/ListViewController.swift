@@ -53,7 +53,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
     {
         if (searchText != "") {
-            searchList = list.filter({$0.range(of: searchText) != nil})
+            searchList = list.filter({$0.range(of: searchText, options: .caseInsensitive) != nil})
             searching = true
             tableView.reloadData()
         } else {
