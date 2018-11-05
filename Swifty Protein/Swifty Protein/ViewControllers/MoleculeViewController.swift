@@ -86,6 +86,37 @@ class MoleculeViewController: UIViewController
         }
     }
     
+    func getResumeOfProtein(name: String)
+    {
+        guard let url = URL(string: "https://files.rcsb.org/ligands/view/" + "\(name)" + ".cif") else {
+            return
+        }
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            if let error = error {
+                print("Error", error)
+            }
+            else if let d = data {
+                let contents = String(data: d, encoding: String.Encoding.utf8)
+                contents?.enumerateLines(invoking: { (line, stop) -> () in
+                    if ((line.range(of: "_chem_comp.name")) != nil)
+                    {
+                        var lineSplit = line.split(separator: "\"")
+                        print (lineSplit[1])
+                        stop = true
+                    }
+                })
+                
+                
+                
+            }
+        }
+        task.resume()
+    }
+    
     /*--------------------------------------*/
     /*----------------ACTION----------------*/
     /*--------------------------------------*/
@@ -104,7 +135,7 @@ class MoleculeViewController: UIViewController
             if completed {
                 // handle task not completed
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Finish", message: "Share Complete", preferredStyle:UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: "Finish", message: "Share Completegi", preferredStyle:UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -184,6 +215,8 @@ class MoleculeViewController: UIViewController
         sceneView.allowsCameraControl = true
         
         selectedAtomLabel.isHidden = true
+        
+        getResumeOfProtein(name: molecule!.name)
     }
 }
 
