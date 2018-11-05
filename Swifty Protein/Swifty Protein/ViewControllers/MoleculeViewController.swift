@@ -13,8 +13,10 @@ class MoleculeViewController: UIViewController
 {
     var molecule: MoleculeInfo?
     var sphereNodeDic: [Int: SCNNode] = [:]
+    var hydrogeneCylinderNodeList: [SCNNode] = []
     var camera = SCNCamera()
     var size: CGFloat = 0.3
+    var changeModel:Bool = false
     @IBOutlet weak var sceneView: SCNView!
     @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var atomElementText: UITextField!
@@ -60,8 +62,8 @@ class MoleculeViewController: UIViewController
         }
     }
     
-    @objc func handleTap(rec: UITapGestureRecognizer){
-        
+    @objc func handleTap(rec: UITapGestureRecognizer)
+    {
         if rec.state == .ended
         {
             let location: CGPoint = rec.location(in: sceneView)
@@ -110,6 +112,38 @@ class MoleculeViewController: UIViewController
         self.present(activityViewController, animated: true, completion: nil)
     }
     
+    @IBAction func changeModelButton(_ sender: UIButton)
+    {
+        changeModel = !changeModel
+        if changeModel == true  // without Hidrogene
+        {
+            for atomNode in sphereNodeDic
+            {
+                for atom in molecule!.atom
+                {
+                    if atom.x == atomNode.value.position.x && atom.y == atomNode.value.position.y && atom.z == atomNode.value.position.z && atom.element == "H"
+                    {
+                        atomNode.value.isHidden = true
+                        break
+                    }
+                }
+                for cylinderNode in hydrogeneCylinderNodeList {
+                    cylinderNode.isHidden = true
+                }
+            }
+        }
+        else
+        {
+            for atomNode in sphereNodeDic
+            {
+                atomNode.value.isHidden = false
+            }
+            for cylinderNode in hydrogeneCylinderNodeList {
+                cylinderNode.isHidden = false
+            }
+        }
+    }
+    
     /*--------------------------------------*/
     /*---------------OVERRIDE---------------*/
     /*--------------------------------------*/
@@ -147,19 +181,22 @@ class MoleculeViewController: UIViewController
                 guard let node1 = sphereNodeDic[conect.ids[0]]?.position else {continue}
                 guard let node2 = sphereNodeDic[id]?.position else {continue}
 
-                scene.rootNode.addChildNode(CylinderLine(parent: scene.rootNode, v1: node1, v2: node2, radius: 0.05, color: UIColor.white))
+                let cylinderNode = CylinderLine(parent: scene.rootNode, v1: node1, v2: node2, radius: 0.05, color: UIColor.white)
+                scene.rootNode.addChildNode(cylinderNode)
+                
+                if molecule?.atom[id - 1].element == "H" {
+                    hydrogeneCylinderNodeList.append(cylinderNode)
+                }
             }
         }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
         sceneView.addGestureRecognizer(tap)
         
-        
-        
         sceneView.scene = scene
         sceneView.backgroundColor = UIColor.white
         sceneView.autoenablesDefaultLighting = true
-//        sceneView.allowsCameraControl = true
+        sceneView.allowsCameraControl = true
         
         atomElementText.sizeToFit()
         atomElementText.backgroundColor = sceneView.backgroundColor

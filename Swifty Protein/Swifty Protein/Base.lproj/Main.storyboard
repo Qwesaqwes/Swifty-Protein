@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JrH-YX-dYa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JrH-YX-dYa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -172,12 +172,22 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDi-lz-wAe">
+                                <rect key="frame" x="255" y="617" width="100" height="30"/>
+                                <state key="normal" title="Change Model"/>
+                                <connections>
+                                    <action selector="changeModelButton:" destination="GDE-og-6nP" eventType="touchUpInside" id="tL2-WS-Q36"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="width" secondItem="iD7-zA-CIh" secondAttribute="width" id="77j-jm-fR6"/>
+                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="bottom" secondItem="IDi-lz-wAe" secondAttribute="bottom" constant="20" id="9VR-NB-ffI"/>
                             <constraint firstItem="jKH-Dc-8o5" firstAttribute="top" secondItem="aOd-IK-Z1T" secondAttribute="top" constant="24" id="FpP-XD-Lbf"/>
+                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="IDi-lz-wAe" secondAttribute="trailing" constant="20" id="Kdz-Su-V6V"/>
                             <constraint firstItem="jKH-Dc-8o5" firstAttribute="leading" secondItem="aOd-IK-Z1T" secondAttribute="leading" constant="16" id="OCN-YY-WRX"/>
+                            <constraint firstItem="IDi-lz-wAe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iD7-zA-CIh" secondAttribute="leading" constant="20" symbolic="YES" id="Tw5-H6-gwr"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerX" secondItem="aOd-IK-Z1T" secondAttribute="centerX" id="d8I-s1-Fah"/>
                             <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="jKH-Dc-8o5" secondAttribute="trailing" constant="262" id="eNu-bn-MXo"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="height" secondItem="iD7-zA-CIh" secondAttribute="height" id="lEL-rf-Ddf"/>
