@@ -69,6 +69,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if !loadingLigand
         {
             loadingLigand = true
+
             guard let url = URL(string: "https://files.rcsb.org/ligands/view/" + name + "_ideal.pdb") else {
                 return
             }

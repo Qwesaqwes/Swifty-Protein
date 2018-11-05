@@ -204,7 +204,7 @@
                     <connections>
                         <outlet property="navBar" destination="eaM-w0-OIy" id="RWO-0H-W6v"/>
                         <outlet property="sceneView" destination="flZ-OP-J9o" id="9AB-ix-p9z"/>
-                        <outlet property="selectedAtomLabel" destination="6nP-WG-xsL" id="UpX-1e-5Fs"/>
+                        <outlet property="selectedAtomLabel" destination="6nP-WG-xsL" id="Vvr-x4-cwa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R25-EC-Vbh" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -62,19 +62,16 @@ class MoleculeViewController: UIViewController
         }
     }
     
-    @objc func handleTap(rec: UITapGestureRecognizer)
-    {
-        if rec.state == .ended
-        {
+    @objc func handleTap(rec: UITapGestureRecognizer) {
+        
+        if rec.state == .ended {
             let location: CGPoint = rec.location(in: sceneView)
             let hits = self.sceneView.hitTest(location, options: nil)
-            if !hits.isEmpty
-            {
+            if !hits.isEmpty {
                 let tappedNode = hits.first?.node
-                for atom in molecule!.atom
-                {
-                    if atom.x == tappedNode?.position.x && atom.y == tappedNode?.position.y && atom.z == tappedNode?.position.z
-                    {
+
+                for atom in molecule!.atom {
+                    if atom.x == tappedNode?.position.x && atom.y == tappedNode?.position.y && atom.z == tappedNode?.position.z {
                         if selectedAtomLabel.isHidden {
                             selectedAtomLabel.isHidden = false
                         }
@@ -82,9 +79,7 @@ class MoleculeViewController: UIViewController
                         selectedAtomLabel.text = String(describing: "Atom Element: \(atom.element)")
                     }
                 }
-            }
-            else
-            {
+            } else {
                 selectedAtomLabel.text = String(describing: "")
                 selectedAtomLabel.isHidden = true
             }
@@ -195,7 +190,8 @@ extension SCNVector3 {
     }
 }
 
-class   CylinderLine: SCNNode {
+class CylinderLine: SCNNode {
+
     init(parent: SCNNode,//Needed to add destination point of your line
         v1: SCNVector3,//source
         v2: SCNVector3,//destination
@@ -206,6 +202,7 @@ class   CylinderLine: SCNNode {
         
         //Calcul the height of our line
         let height = v1.distance(receiver: v2)
+
         //set position to v1 coordonate
         position = v1
         //Create the second node to draw direction vector
@@ -236,7 +233,7 @@ class   CylinderLine: SCNNode {
         //set contrainte direction to our vector
         constraints = [SCNLookAtConstraint(target: nodeV2)]
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
