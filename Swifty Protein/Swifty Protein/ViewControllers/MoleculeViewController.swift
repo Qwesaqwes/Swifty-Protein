@@ -20,6 +20,7 @@ class MoleculeViewController: UIViewController
     @IBOutlet weak var sceneView: SCNView!
     @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var selectedAtomLabel: UILabel!
+    @IBOutlet weak var atomNameLabel: UILabel!
     
     /*--------------------------------------*/
     /*---------------FUNCTION---------------*/

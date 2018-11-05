@@ -32,6 +32,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Zo4-yn-Wcr"/>
                                 </constraints>
                                 <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKG-fm-Mpp">
@@ -169,8 +170,9 @@
                                     <outlet property="delegate" destination="GDE-og-6nP" id="NDf-Oz-iBy"/>
                                 </connections>
                             </sceneKitView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDi-lz-wAe">
-                                <rect key="frame" x="255" y="617" width="100" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDi-lz-wAe">
+                                <rect key="frame" x="262" y="614" width="88" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Change Model"/>
                                 <connections>
                                     <action selector="changeModelButton:" destination="GDE-og-6nP" eventType="touchUpInside" id="tL2-WS-Q36"/>
@@ -182,16 +184,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Atom" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkA-E2-NHl" userLabel="NameAtomLabel">
+                                <rect key="frame" x="25" y="625" width="229" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="width" secondItem="iD7-zA-CIh" secondAttribute="width" id="77j-jm-fR6"/>
-                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="bottom" secondItem="IDi-lz-wAe" secondAttribute="bottom" constant="20" id="9VR-NB-ffI"/>
-                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="IDi-lz-wAe" secondAttribute="trailing" constant="20" id="Kdz-Su-V6V"/>
+                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="bottom" secondItem="IDi-lz-wAe" secondAttribute="bottom" constant="25" id="9VR-NB-ffI"/>
+                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="IDi-lz-wAe" secondAttribute="trailing" constant="25" id="Kdz-Su-V6V"/>
                             <constraint firstItem="6nP-WG-xsL" firstAttribute="leading" secondItem="aOd-IK-Z1T" secondAttribute="leading" constant="25" id="L09-ci-v5Q"/>
                             <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="6nP-WG-xsL" secondAttribute="trailing" constant="25" id="Oeq-9c-AmF"/>
-                            <constraint firstItem="IDi-lz-wAe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iD7-zA-CIh" secondAttribute="leading" constant="20" symbolic="YES" id="Tw5-H6-gwr"/>
+                            <constraint firstItem="IDi-lz-wAe" firstAttribute="leading" secondItem="dkA-E2-NHl" secondAttribute="trailing" constant="8" symbolic="YES" id="YO4-XL-xs5"/>
+                            <constraint firstItem="dkA-E2-NHl" firstAttribute="leading" secondItem="aOd-IK-Z1T" secondAttribute="leading" constant="25" id="b9g-x8-qKg"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerX" secondItem="aOd-IK-Z1T" secondAttribute="centerX" id="d8I-s1-Fah"/>
+                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="bottom" secondItem="dkA-E2-NHl" secondAttribute="bottom" constant="25" id="kaZ-na-4yl"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="height" secondItem="iD7-zA-CIh" secondAttribute="height" id="lEL-rf-Ddf"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerY" secondItem="aOd-IK-Z1T" secondAttribute="centerY" id="qCc-Pj-ynI"/>
                             <constraint firstItem="6nP-WG-xsL" firstAttribute="top" secondItem="aOd-IK-Z1T" secondAttribute="top" constant="25" id="zCq-zo-uiS"/>
@@ -206,6 +216,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="atomNameLabel" destination="dkA-E2-NHl" id="w5s-Mc-qWC"/>
                         <outlet property="navBar" destination="eaM-w0-OIy" id="RWO-0H-W6v"/>
                         <outlet property="sceneView" destination="flZ-OP-J9o" id="9AB-ix-p9z"/>
                         <outlet property="selectedAtomLabel" destination="6nP-WG-xsL" id="Vvr-x4-cwa"/>
