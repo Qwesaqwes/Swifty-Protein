@@ -128,11 +128,43 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             for str in conectArray {
                 let strArray = str.split(separator: " ")
                 var idsConection: ConectInfo = ConectInfo()
+                var isSecond: Bool = false
+                var firstId: Int = -1
+                var isPresent: Bool = false
 
                 for conection in strArray {
-                    if conection == "CONECT" {continue}
+                    if conection == "CONECT" {
+                        isSecond = true
+                        continue
+                    }
                     guard let id = Int(conection) else {continue}
-                    idsConection.ids.append(id)
+                    if isSecond {
+                        idsConection.ids.append(id)
+                        isSecond = false
+                        firstId = id
+                    } else {
+                        for conection in conect {
+                            if isPresent {break}
+                            var firstCurrentId = -1
+                            for (index, currentId) in conection.ids.enumerated() {
+                                if index == 0 {
+                                    firstCurrentId = currentId
+                                    continue
+                                }
+                                if firstId == currentId && firstCurrentId == id {
+                                    isPresent = true
+                                    break
+                                }
+                            }
+                        }
+                        if isPresent {
+                            isPresent = false
+                            continue
+                        } else {
+                            idsConection.ids.append(id)
+                        }
+                    }
+                    
                 }
                 conect.append(idsConection)
             }

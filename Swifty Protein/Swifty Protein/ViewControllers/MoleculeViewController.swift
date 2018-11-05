@@ -19,7 +19,7 @@ class MoleculeViewController: UIViewController
     var changeModel:Bool = false
     @IBOutlet weak var sceneView: SCNView!
     @IBOutlet weak var navBar: UINavigationItem!
-    @IBOutlet weak var atomElementText: UITextField!
+    @IBOutlet weak var selectedAtomLabel: UILabel!
     
     /*--------------------------------------*/
     /*---------------FUNCTION---------------*/
@@ -75,18 +75,18 @@ class MoleculeViewController: UIViewController
                 {
                     if atom.x == tappedNode?.position.x && atom.y == tappedNode?.position.y && atom.z == tappedNode?.position.z
                     {
-                        if atomElementText.isHidden
-                        {
-                            atomElementText.isHidden = false
+                        if selectedAtomLabel.isHidden {
+                            selectedAtomLabel.isHidden = false
                         }
-                        atomElementText.text = String(describing: "Atom Element: " + "\(atom.element)")
+                        selectedAtomLabel.textColor = UIColor.black
+                        selectedAtomLabel.text = String(describing: "Atom Element: \(atom.element)")
                     }
                 }
             }
             else
             {
-                atomElementText.text = String(describing: "")
-                atomElementText.isHidden = true
+                selectedAtomLabel.text = String(describing: "")
+                selectedAtomLabel.isHidden = true
             }
         }
     }
@@ -95,34 +95,23 @@ class MoleculeViewController: UIViewController
     /*----------------ACTION----------------*/
     /*--------------------------------------*/
 
-    @IBAction func shareButton(_ sender: UIBarButtonItem)
-    {
-        // image to share
+    @IBAction func shareButton(_ sender: UIBarButtonItem) {
         let image = sceneView.snapshot()
         
-        // set up activity view controller
-        let imageToShare = [image]
-        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
-        // exclude some activity types from the list (optional)
         activityViewController.excludedActivityTypes = [UIActivityType.airDrop]
         
-        // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    @IBAction func changeModelButton(_ sender: UIButton)
-    {
+    @IBAction func changeModelButton(_ sender: UIButton) {
         changeModel = !changeModel
-        if changeModel == true  // without Hidrogene
-        {
-            for atomNode in sphereNodeDic
-            {
-                for atom in molecule!.atom
-                {
-                    if atom.x == atomNode.value.position.x && atom.y == atomNode.value.position.y && atom.z == atomNode.value.position.z && atom.element == "H"
-                    {
+        if changeModel == true { // without hydrogen
+            for atomNode in sphereNodeDic {
+                for atom in molecule!.atom {
+                    if atom.x == atomNode.value.position.x && atom.y == atomNode.value.position.y && atom.z == atomNode.value.position.z && atom.element == "H" {
                         atomNode.value.isHidden = true
                         break
                     }
@@ -131,11 +120,8 @@ class MoleculeViewController: UIViewController
                     cylinderNode.isHidden = true
                 }
             }
-        }
-        else
-        {
-            for atomNode in sphereNodeDic
-            {
+        } else {
+            for atomNode in sphereNodeDic {
                 atomNode.value.isHidden = false
             }
             for cylinderNode in hydrogeneCylinderNodeList {
@@ -155,10 +141,6 @@ class MoleculeViewController: UIViewController
 
         let scene = SCNScene()
         
-//        let cameraNode = SCNNode()
-//        cameraNode.camera = self.camera
-//        cameraNode.position = SCNVector3(x: -3.0, y: 3.0, z: 3.0)
-        
         for atom in molecule!.atom {
             let sphere = SCNSphere(radius: self.size)
             sphere.segmentCount = 30
@@ -168,16 +150,12 @@ class MoleculeViewController: UIViewController
             
             scene.rootNode.addChildNode(sphereNode)
             sphereNodeDic[atom.id] = sphereNode
-            
-//            let constraint = SCNLookAtConstraint(target: sphereNode)
-//            constraint.isGimbalLockEnabled = true
-//            cameraNode.constraints = [constraint]
         }
         
         for conect in molecule!.conect {
             for (index, id) in conect.ids.enumerated() {
                 if index == 0 {continue}
-
+                
                 guard let node1 = sphereNodeDic[conect.ids[0]]?.position else {continue}
                 guard let node2 = sphereNodeDic[id]?.position else {continue}
 
@@ -194,26 +172,11 @@ class MoleculeViewController: UIViewController
         sceneView.addGestureRecognizer(tap)
         
         sceneView.scene = scene
-        sceneView.backgroundColor = UIColor.white
+
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         
-        atomElementText.sizeToFit()
-        atomElementText.backgroundColor = sceneView.backgroundColor
-        atomElementText.isHidden = true
-        if atomElementText.backgroundColor == UIColor.white
-        {
-            atomElementText.textColor = UIColor.black
-        }
-        else
-        {
-            atomElementText.textColor = UIColor.white
-        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        selectedAtomLabel.isHidden = true
     }
 }
 
@@ -224,7 +187,7 @@ extension SCNVector3 {
         let zd = receiver.z - self.z
         let distance = Float(sqrt(xd * xd + yd * yd + zd * zd))
         
-        if (distance < 0){
+        if (distance < 0) {
             return (distance * -1)
         } else {
             return (distance)
@@ -232,45 +195,48 @@ extension SCNVector3 {
     }
 }
 
-class   CylinderLine: SCNNode
-{
-    init( parent: SCNNode,//Needed to add destination point of your line
+class   CylinderLine: SCNNode {
+    init(parent: SCNNode,//Needed to add destination point of your line
         v1: SCNVector3,//source
         v2: SCNVector3,//destination
         radius: CGFloat,//somes option for the cylinder
-        color: UIColor )// color of your node object
+        color: UIColor)// color of your node object
     {
         super.init()
         
         //Calcul the height of our line
-        let  height = v1.distance(receiver: v2)
+        let height = v1.distance(receiver: v2)
         //set position to v1 coordonate
         position = v1
         //Create the second node to draw direction vector
         let nodeV2 = SCNNode()
         //define his position
         nodeV2.position = v2
+        
         //add it to parent
         parent.addChildNode(nodeV2)
         //Align Z axis
         let zAlign = SCNNode()
         zAlign.eulerAngles.x = .pi / 2
+
         //create our cylinder
         let cyl = SCNCylinder(radius: radius, height: CGFloat(height))
         cyl.firstMaterial?.diffuse.contents = color
         //Create node with cylinder
         let nodeCyl = SCNNode(geometry: cyl )
-        nodeCyl.position.y = -height/2
+        nodeCyl.position.y = -height / 2
+
         zAlign.addChildNode(nodeCyl)
         //Add it to child
         addChildNode(zAlign)
+        
+        if radius == 0.04 {
+            print("self", self)
+        }
         //set contrainte direction to our vector
         constraints = [SCNLookAtConstraint(target: nodeV2)]
     }
     
-    override init() {
-        super.init()
-    }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

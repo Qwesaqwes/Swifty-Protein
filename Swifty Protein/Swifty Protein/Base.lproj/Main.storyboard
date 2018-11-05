@@ -165,13 +165,6 @@
                                     <outlet property="delegate" destination="GDE-og-6nP" id="NDf-Oz-iBy"/>
                                 </connections>
                             </sceneKitView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jKH-Dc-8o5">
-                                <rect key="frame" x="16" y="88" width="97" height="22"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDi-lz-wAe">
                                 <rect key="frame" x="255" y="617" width="100" height="30"/>
                                 <state key="normal" title="Change Model"/>
@@ -179,19 +172,25 @@
                                     <action selector="changeModelButton:" destination="GDE-og-6nP" eventType="touchUpInside" id="tL2-WS-Q36"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6nP-WG-xsL">
+                                <rect key="frame" x="25" y="89" width="325" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="width" secondItem="iD7-zA-CIh" secondAttribute="width" id="77j-jm-fR6"/>
                             <constraint firstItem="aOd-IK-Z1T" firstAttribute="bottom" secondItem="IDi-lz-wAe" secondAttribute="bottom" constant="20" id="9VR-NB-ffI"/>
-                            <constraint firstItem="jKH-Dc-8o5" firstAttribute="top" secondItem="aOd-IK-Z1T" secondAttribute="top" constant="24" id="FpP-XD-Lbf"/>
                             <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="IDi-lz-wAe" secondAttribute="trailing" constant="20" id="Kdz-Su-V6V"/>
-                            <constraint firstItem="jKH-Dc-8o5" firstAttribute="leading" secondItem="aOd-IK-Z1T" secondAttribute="leading" constant="16" id="OCN-YY-WRX"/>
+                            <constraint firstItem="6nP-WG-xsL" firstAttribute="leading" secondItem="aOd-IK-Z1T" secondAttribute="leading" constant="25" id="L09-ci-v5Q"/>
+                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="6nP-WG-xsL" secondAttribute="trailing" constant="25" id="Oeq-9c-AmF"/>
                             <constraint firstItem="IDi-lz-wAe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iD7-zA-CIh" secondAttribute="leading" constant="20" symbolic="YES" id="Tw5-H6-gwr"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerX" secondItem="aOd-IK-Z1T" secondAttribute="centerX" id="d8I-s1-Fah"/>
-                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="jKH-Dc-8o5" secondAttribute="trailing" constant="262" id="eNu-bn-MXo"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="height" secondItem="iD7-zA-CIh" secondAttribute="height" id="lEL-rf-Ddf"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerY" secondItem="aOd-IK-Z1T" secondAttribute="centerY" id="qCc-Pj-ynI"/>
+                            <constraint firstItem="6nP-WG-xsL" firstAttribute="top" secondItem="aOd-IK-Z1T" secondAttribute="top" constant="25" id="zCq-zo-uiS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aOd-IK-Z1T"/>
                     </view>
@@ -203,9 +202,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="atomElementText" destination="jKH-Dc-8o5" id="bce-UC-gas"/>
                         <outlet property="navBar" destination="eaM-w0-OIy" id="RWO-0H-W6v"/>
                         <outlet property="sceneView" destination="flZ-OP-J9o" id="9AB-ix-p9z"/>
+                        <outlet property="selectedAtomLabel" destination="6nP-WG-xsL" id="UpX-1e-5Fs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R25-EC-Vbh" userLabel="First Responder" sceneMemberID="firstResponder"/>

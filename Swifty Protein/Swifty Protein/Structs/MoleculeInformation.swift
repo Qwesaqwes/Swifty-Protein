@@ -25,6 +25,6 @@ struct ConectInfo
 struct MoleculeInfo
 {
     var name: String = ""
-    var atom :[AtomInfo] = []
-    var conect :[ConectInfo] = []
+    var atom: [AtomInfo] = []
+    var conect: [ConectInfo] = []
 }
