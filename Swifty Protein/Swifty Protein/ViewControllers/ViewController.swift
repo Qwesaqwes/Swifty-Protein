@@ -9,11 +9,15 @@
 import UIKit
 import LocalAuthentication
 
-class ViewController: UIViewController
+class ViewController: UIViewController, UITextFieldDelegate
 {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var usernameText: UITextField!
-    @IBOutlet weak var passwordText: UITextField!
+    @IBOutlet weak var passwordText: UITextField! {
+        didSet {
+            passwordText.delegate = self
+        }
+    }
     @IBOutlet weak var touchIDbutton: UIButton!
     
 //    let context:LAContext = LAContext()
@@ -23,36 +27,21 @@ class ViewController: UIViewController
     /*---------------ACTION-----------------*/
     /*--------------------------------------*/
     
-    @IBAction func Login(_ sender: Any)
-    {
-        if usernameText.text == "admin" && passwordText.text == "admin"
-        {
-            performSegue(withIdentifier: "listSegue", sender: "")
-        }
-        else
-        {
-            let alert = UIAlertController(title: "Error", message: "Username or Password, wrong", preferredStyle:UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
+    @IBAction func Login(_ sender: Any) {
+        verificationId()
     }
     
-    @IBAction func TouchID(_ sender: Any)
-    {
+    @IBAction func TouchID(_ sender: Any) {
         let context:LAContext = LAContext()
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
-        {
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
             context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "We need your TouchID", reply: {(wasSuccessful, error) in
-                if (wasSuccessful)
-                {
+                if (wasSuccessful) {
                     // TouchID valid, segue to new view
                     print ("TouchID successful")
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "listSegue", sender: "")
                     }
-                }
-                else
-                {
+                } else {
                     print (error.debugDescription)
                 }
             })
@@ -60,38 +49,57 @@ class ViewController: UIViewController
     }
     
     /*--------------------------------------*/
-    /*---------------OVERRIDE---------------*/
+    /*---------------FUNCTION---------------*/
     /*--------------------------------------*/
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if segue.identifier == "listSegue"
-        {
-            
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        verificationId()
+        return true
+    }
+    
+    func verificationId() {
+        if usernameText.text == "admin" && passwordText.text == "admin" {
+            performSegue(withIdentifier: "listSegue", sender: "")
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Username or Password, wrong", preferredStyle:UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    /*--------------------------------------*/
+    /*---------------OVERRIDE---------------*/
+    /*--------------------------------------*/
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-//        loginButton.layer.cornerRadius = 5
+//        let backgroundImage = #imageLiteral(resourceName: "backgroundImage")
+//        backgroundImage.content
+        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "backgroundImage"))
+        
         usernameText.layer.cornerRadius = 5
         usernameText.layer.borderWidth = 1
-        usernameText.layer.borderColor = UIColor.lightGray.cgColor
+        usernameText.layer.borderColor = UIColor(red: 0.902, green: 0.902, blue: 0.902, alpha: 1).cgColor
         passwordText.layer.cornerRadius = 5
         passwordText.layer.borderWidth = 1
-        passwordText.layer.borderColor = UIColor.lightGray.cgColor
+        passwordText.layer.borderColor = UIColor(red: 0.902, green: 0.902, blue: 0.902, alpha: 1).cgColor
         
+        loginButton.layer.cornerRadius = 5
+        touchIDbutton.layer.cornerRadius = 5
+        
+        // Allow to tap everywhere to dismiss the keyboard
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
         
         // Check if device have TouchID
         var authError: NSError?
         let context:LAContext = LAContext()
-        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError)
-        {
-            if (authError?.code)! == kLAErrorTouchIDNotEnrolled
-            {
+        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+            if (authError?.code)! == kLAErrorTouchIDNotEnrolled {
                 touchIDbutton.isHidden = true
             }
         }
