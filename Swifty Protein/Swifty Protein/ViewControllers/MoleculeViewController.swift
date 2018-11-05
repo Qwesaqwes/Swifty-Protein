@@ -16,11 +16,11 @@ class MoleculeViewController: UIViewController
     var hydrogeneCylinderNodeList: [SCNNode] = []
     var camera = SCNCamera()
     var size: CGFloat = 0.3
-    var changeModel:Bool = false
+    var changeModel: Bool = false
     @IBOutlet weak var sceneView: SCNView!
     @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var selectedAtomLabel: UILabel!
-    @IBOutlet weak var atomNameLabel: UILabel!
+    @IBOutlet weak var atomNameTextView: UITextView!
     
     /*--------------------------------------*/
     /*---------------FUNCTION---------------*/
@@ -87,8 +87,7 @@ class MoleculeViewController: UIViewController
         }
     }
     
-    func getResumeOfProtein(name: String)
-    {
+    func getResumeOfProtein(name: String) {
         guard let url = URL(string: "https://files.rcsb.org/ligands/view/" + "\(name)" + ".cif") else {
             return
         }
@@ -103,16 +102,14 @@ class MoleculeViewController: UIViewController
             else if let d = data {
                 let contents = String(data: d, encoding: String.Encoding.utf8)
                 contents?.enumerateLines(invoking: { (line, stop) -> () in
-                    if ((line.range(of: "_chem_comp.name")) != nil)
-                    {
+                    if ((line.range(of: "_chem_comp.name")) != nil) {
                         var lineSplit = line.split(separator: "\"")
-                        print (lineSplit[1])
+                        DispatchQueue.main.async {
+                            self.atomNameTextView.text = String(lineSplit[1])
+                        }
                         stop = true
                     }
                 })
-                
-                
-                
             }
         }
         task.resume()
@@ -136,7 +133,7 @@ class MoleculeViewController: UIViewController
             if completed {
                 // handle task not completed
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Finish", message: "Share Completegi", preferredStyle:UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: "Finish", message: "Share Complete", preferredStyle:UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -211,7 +208,6 @@ class MoleculeViewController: UIViewController
         sceneView.addGestureRecognizer(tap)
         
         sceneView.scene = scene
-
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         

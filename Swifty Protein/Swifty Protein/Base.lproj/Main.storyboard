@@ -106,7 +106,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LPn-PP-6Sp" id="Qal-z9-eUs">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="58.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PV1-D6-WPs">
@@ -171,8 +171,8 @@
                                 </connections>
                             </sceneKitView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDi-lz-wAe">
-                                <rect key="frame" x="262" y="614" width="88" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <rect key="frame" x="259" y="614" width="91" height="28"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                 <state key="normal" title="Change Model"/>
                                 <connections>
                                     <action selector="changeModelButton:" destination="GDE-og-6nP" eventType="touchUpInside" id="tL2-WS-Q36"/>
@@ -184,24 +184,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Atom" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkA-E2-NHl" userLabel="NameAtomLabel">
-                                <rect key="frame" x="25" y="625" width="229" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2vn-gv-BO0" userLabel="NameAtomTextView">
+                                <rect key="frame" x="25" y="582" width="226" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Osu-Ye-BJB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="bottom" secondItem="2vn-gv-BO0" secondAttribute="bottom" constant="25" id="6Dp-8L-81a"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="width" secondItem="iD7-zA-CIh" secondAttribute="width" id="77j-jm-fR6"/>
                             <constraint firstItem="aOd-IK-Z1T" firstAttribute="bottom" secondItem="IDi-lz-wAe" secondAttribute="bottom" constant="25" id="9VR-NB-ffI"/>
                             <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="IDi-lz-wAe" secondAttribute="trailing" constant="25" id="Kdz-Su-V6V"/>
                             <constraint firstItem="6nP-WG-xsL" firstAttribute="leading" secondItem="aOd-IK-Z1T" secondAttribute="leading" constant="25" id="L09-ci-v5Q"/>
                             <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="6nP-WG-xsL" secondAttribute="trailing" constant="25" id="Oeq-9c-AmF"/>
-                            <constraint firstItem="IDi-lz-wAe" firstAttribute="leading" secondItem="dkA-E2-NHl" secondAttribute="trailing" constant="8" symbolic="YES" id="YO4-XL-xs5"/>
-                            <constraint firstItem="dkA-E2-NHl" firstAttribute="leading" secondItem="aOd-IK-Z1T" secondAttribute="leading" constant="25" id="b9g-x8-qKg"/>
+                            <constraint firstItem="IDi-lz-wAe" firstAttribute="leading" secondItem="2vn-gv-BO0" secondAttribute="trailing" constant="8" symbolic="YES" id="UNZ-5i-dFE"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerX" secondItem="aOd-IK-Z1T" secondAttribute="centerX" id="d8I-s1-Fah"/>
-                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="bottom" secondItem="dkA-E2-NHl" secondAttribute="bottom" constant="25" id="kaZ-na-4yl"/>
+                            <constraint firstItem="2vn-gv-BO0" firstAttribute="leading" secondItem="aOd-IK-Z1T" secondAttribute="leading" constant="25" id="jQO-tt-IcR"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="height" secondItem="iD7-zA-CIh" secondAttribute="height" id="lEL-rf-Ddf"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerY" secondItem="aOd-IK-Z1T" secondAttribute="centerY" id="qCc-Pj-ynI"/>
                             <constraint firstItem="6nP-WG-xsL" firstAttribute="top" secondItem="aOd-IK-Z1T" secondAttribute="top" constant="25" id="zCq-zo-uiS"/>
@@ -216,7 +218,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="atomNameLabel" destination="dkA-E2-NHl" id="w5s-Mc-qWC"/>
+                        <outlet property="atomNameTextView" destination="2vn-gv-BO0" id="1pc-ji-MFJ"/>
                         <outlet property="navBar" destination="eaM-w0-OIy" id="RWO-0H-W6v"/>
                         <outlet property="sceneView" destination="flZ-OP-J9o" id="9AB-ix-p9z"/>
                         <outlet property="selectedAtomLabel" destination="6nP-WG-xsL" id="Vvr-x4-cwa"/>
