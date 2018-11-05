@@ -99,6 +99,18 @@ class MoleculeViewController: UIViewController
         activityViewController.excludedActivityTypes = [UIActivityType.airDrop]
         
         self.present(activityViewController, animated: true, completion: nil)
+        
+        activityViewController.completionWithItemsHandler = { activity, completed, items, error in
+            if completed {
+                // handle task not completed
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Finish", message: "Share Complete", preferredStyle:UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                return
+            }
+        }
     }
     
     @IBAction func changeModelButton(_ sender: UIButton) {
