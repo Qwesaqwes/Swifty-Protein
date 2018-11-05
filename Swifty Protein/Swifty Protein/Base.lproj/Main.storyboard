@@ -165,20 +165,36 @@
                                     <outlet property="delegate" destination="GDE-og-6nP" id="NDf-Oz-iBy"/>
                                 </connections>
                             </sceneKitView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1WA-T2-i41" userLabel="Selected Atom Label">
+                                <rect key="frame" x="25" y="89" width="325" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="width" secondItem="iD7-zA-CIh" secondAttribute="width" id="77j-jm-fR6"/>
+                            <constraint firstItem="aOd-IK-Z1T" firstAttribute="trailing" secondItem="1WA-T2-i41" secondAttribute="trailing" constant="25" id="IXn-Fh-uLN"/>
+                            <constraint firstItem="1WA-T2-i41" firstAttribute="leading" secondItem="aOd-IK-Z1T" secondAttribute="leading" constant="25" id="ZRo-B6-CO6"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerX" secondItem="aOd-IK-Z1T" secondAttribute="centerX" id="d8I-s1-Fah"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="height" secondItem="iD7-zA-CIh" secondAttribute="height" id="lEL-rf-Ddf"/>
                             <constraint firstItem="flZ-OP-J9o" firstAttribute="centerY" secondItem="aOd-IK-Z1T" secondAttribute="centerY" id="qCc-Pj-ynI"/>
+                            <constraint firstItem="1WA-T2-i41" firstAttribute="top" secondItem="aOd-IK-Z1T" secondAttribute="top" constant="25" id="vR4-EN-WU0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aOd-IK-Z1T"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Molecule" id="eaM-w0-OIy"/>
+                    <navigationItem key="navigationItem" title="Molecule" id="eaM-w0-OIy">
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="BxS-0O-qj2">
+                            <connections>
+                                <action selector="shareButton:" destination="GDE-og-6nP" id="kAD-lG-s8c"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="navBar" destination="eaM-w0-OIy" id="RWO-0H-W6v"/>
                         <outlet property="sceneView" destination="flZ-OP-J9o" id="9AB-ix-p9z"/>
+                        <outlet property="selectedAtomLabel" destination="1WA-T2-i41" id="Rld-Ow-SMN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R25-EC-Vbh" userLabel="First Responder" sceneMemberID="firstResponder"/>

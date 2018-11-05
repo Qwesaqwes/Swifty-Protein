@@ -12,7 +12,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 {
     var list:[String] = []
     var searchList = [String]()
-    var searching:Bool = false
+    var searching: Bool = false
+    var loadingLigand: Bool = false
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -41,6 +42,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         if searching {
             self.getLigand(name: searchList[indexPath.row])
         } else {
@@ -64,36 +66,41 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     {
         var ligand:[String] = []
         
-        guard let url = URL(string: "https://files.rcsb.org/ligands/view/" + name + "_ideal.pdb") else {
-            return
-        }
-        let request = NSMutableURLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        let task = URLSession.shared.dataTask(with: request as URLRequest) {
-            data, response, error in
-            if let error = error {
-                print("Error", error)
+        if !loadingLigand
+        {
+            loadingLigand = true
+//            guard let url = URL(string: "https://files.rcsb.org/ligands/view/" + name + "_model.pdb") else {
+            guard let url = URL(string: "https://files.rcsb.org/ligands/view/" + name + "_ideal.pdb") else {
+                return
             }
-            else if let d = data {
-                let contents = String(data: d, encoding: String.Encoding.utf8)
-                contents?.enumerateLines(invoking: { (line, stop) -> () in
-                    ligand.append(line)
-                })
-                
-//                print("ligand", contents)
-                
-                var mole: MoleculeInfo = self.parsing(lig: ligand)
-                mole.name = name
-                if !mole.atom.isEmpty {
-//                    print("MOLE", mole)
+            let request = NSMutableURLRequest(url: url)
+            request.httpMethod = "GET"
+            
+            let task = URLSession.shared.dataTask(with: request as URLRequest) {
+                data, response, error in
+                if let error = error {
+                    print("Error", error)
+                }
+                else if let d = data {
+                    let contents = String(data: d, encoding: String.Encoding.utf8)
+                    contents?.enumerateLines(invoking: { (line, stop) -> () in
+                        ligand.append(line)
+                    })
+                    var mole: MoleculeInfo = self.parsing(lig: ligand)
+                    mole.name = name
+                    if !mole.atom.isEmpty {
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "moleculeSegue", sender: mole)
+                        }
+                    }
                     DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "moleculeSegue", sender: mole)
+                        self.loadingLigand = false
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
             }
+            task.resume()
         }
-        task.resume()
     }
     
     private func parsing(lig: [String]) -> MoleculeInfo
@@ -108,7 +115,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.present(alert, animated: true, completion: nil)
             }
             return (MoleculeInfo(name: "", atom: [], conect: []))
-        } else {
+        }
+        else
+        {
             let atomArray: [String] = lig.filter({$0.range(of: "ATOM") != nil})
             let conectArray: [String] = lig.filter({$0.range(of: "CONECT") != nil})
             
