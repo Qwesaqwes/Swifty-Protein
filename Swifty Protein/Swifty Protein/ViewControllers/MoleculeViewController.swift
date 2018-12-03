@@ -102,10 +102,11 @@ class MoleculeViewController: UIViewController
             else if let d = data {
                 let contents = String(data: d, encoding: String.Encoding.utf8)
                 contents?.enumerateLines(invoking: { (line, stop) -> () in
-                    if ((line.range(of: "_chem_comp.name")) != nil) {
-                        var lineSplit = line.split(separator: "\"")
+                    if let range = line.range(of: "_chem_comp.name") {
+                        var nameLiguand = String(line[range.upperBound...])
+                        nameLiguand = nameLiguand.trimmingCharacters(in: .whitespacesAndNewlines)
                         DispatchQueue.main.async {
-                            self.atomNameTextView.text = String(lineSplit[1])
+                            self.atomNameTextView.text = nameLiguand
                         }
                         stop = true
                     }
